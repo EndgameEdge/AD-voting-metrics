@@ -24,7 +24,7 @@ Follow these steps to set up the project:
    ```
 1. Navigate to the cloned directory:
    ```bash
-   cd votes-delegate-tracking
+   cd AD-voting-metrics
    ```
 1. Install the required dependencies:
    ```bash
