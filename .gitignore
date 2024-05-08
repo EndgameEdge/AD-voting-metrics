@@ -1,0 +1,38 @@
+# System-specific files
+*.log
+*.pid
+*.pid.lock
+*.pyc
+__pycache__/
+*.sqlite
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/venv
+
+# Dependency directories
+/node_modules/
+/jspm_packages/
+/bower_components/
+
+# Build outputs
+/dist
+/tmp
+/out
+
+# Local development
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+*.history/
+
+# Heroku specific
+/heroku_output/
+*.DS_Store
