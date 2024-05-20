@@ -21,7 +21,7 @@ while True:
     start_date, end_date = maker.generate_dates(query_input)
 
     # Check if valid dates were entered
-    if start_date == None and  end_date == None: 
+    if start_date is None and end_date is None: 
         continue
 
     print('Getting information...')
@@ -34,7 +34,7 @@ while True:
         continue
 
     # Get MKR delegated for each delegate contract
-    print('Getting MRK...')
+    print('Getting MKR...')
     df['MKR Delegated'], df['Start Date'] = zip(*df['Delegate Contract'].apply(lambda x: maker.get_mkr_delegated(x, delegate_list, end_date)))
 
     # Get delegate list and MKR ranking
@@ -68,9 +68,9 @@ while True:
     df = df.sort_values(by='MKR Delegated', ascending=False)
 
     # Get poll IDs information and vote from polls
-    print('Getting POOL IDS...')
+    print('Getting POLL IDS...')
     POLL_INFO = maker.get_poll_ids(start_date, end_date)
-    print('Getting VOTE FROM POOLS...')
+    print('Getting VOTE FROM POLLS...')
     df = maker.get_vote_poll_ids(POLL_INFO, df, df_mkr)
 
     # Get SPELL addresses information and vote from SPELL
