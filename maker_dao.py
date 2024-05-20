@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime,timedelta
 from dateutil import parser
-import pandas as pd
 import sys
 
 def generate_dates(query_input):
@@ -65,15 +64,15 @@ def get_mkr_delegated(address,data,end_date):
     if delegate_info:
         earliest_date = datetime.strptime( delegate_info['blockTimestamp'] , '%Y-%m-%dT%H:%M:%S%z')
 
-        mrk_locked_info = delegate_info.get("mkrLockedDelegate", [])
-        mrk_locked_info.sort(key=lambda x: x["blockTimestamp"])
+        mkr_locked_info = delegate_info.get("mkrLockedDelegate", [])
+        mkr_locked_info.sort(key=lambda x: x["blockTimestamp"])
         
-        if mrk_locked_info:
+        if mkr_locked_info:
             mkr_delegated = 0
-            for mrk_locked_delegate in mrk_locked_info:
-                blockTimestamp_datetime = datetime.strptime(mrk_locked_delegate["blockTimestamp"], '%Y-%m-%dT%H:%M:%S%z').date()  
+            for mkr_locked_delegate in mkr_locked_info:
+                blockTimestamp_datetime = datetime.strptime(mkr_locked_delegate["blockTimestamp"], '%Y-%m-%dT%H:%M:%S%z').date()  
                 if end_date >= blockTimestamp_datetime:
-                    mkr_delegated = round(float(mrk_locked_delegate['callerLockTotal']), 4)
+                    mkr_delegated = round(float(mkr_locked_delegate['callerLockTotal']), 4)
         else:
             mkr_delegated = 0
 
@@ -84,46 +83,46 @@ def get_mkr_delegated(address,data,end_date):
 #Define a function to retrieve the total MK held by each delegate by date.
 def get_delegate_list_mkr(df,data,start_date,end_date):
     start_date_initial = start_date
-    delegate_data_mrk = {'contract':{}, 'name':{}}
+    delegate_data_mkr = {'contract':{}, 'name':{}}
     for index,row in df.iterrows():
         start_date = start_date_initial
         delegate_name = row['Delegate Name'].strip().lower()
         delegate_contract = row['Delegate Contract']
-        if not delegate_name in delegate_data_mrk['name']:
-            delegate_data_mrk['name'][delegate_name] = {}
+        if delegate_name not in delegate_data_mkr['name']:
+            delegate_data_mkr['name'][delegate_name] = {}
   
-        if not delegate_contract in delegate_data_mrk['contract']:
-            delegate_data_mrk['contract'][delegate_contract] = {}
+        if delegate_contract not in delegate_data_mkr['contract']:
+            delegate_data_mkr['contract'][delegate_contract] = {}
 
         while start_date <= end_date:
-            if not start_date.strftime("%Y-%m-%d") in delegate_data_mrk['name'][delegate_name]:
-                delegate_data_mrk['name'][delegate_name][start_date.strftime("%Y-%m-%d")] = {'mkr':0}                
-            if not start_date.strftime("%Y-%m-%d") in delegate_data_mrk['contract'][delegate_contract]:
-                delegate_data_mrk['contract'][delegate_contract][start_date] = {'mkr':0}     
+            if start_date.strftime("%Y-%m-%d") not in delegate_data_mkr['name'][delegate_name]:
+                delegate_data_mkr['name'][delegate_name][start_date.strftime("%Y-%m-%d")] = {'mkr':0}                
+            if start_date.strftime("%Y-%m-%d") not in delegate_data_mkr['contract'][delegate_contract]:
+                delegate_data_mkr['contract'][delegate_contract][start_date] = {'mkr':0}     
 
             mkr_delegated, earliest_date = get_mkr_delegated(delegate_contract,data,start_date)
 
-            delegate_data_mrk['name'][delegate_name][start_date.strftime("%Y-%m-%d")]['mkr'] +=  mkr_delegated
+            delegate_data_mkr['name'][delegate_name][start_date.strftime("%Y-%m-%d")]['mkr'] +=  mkr_delegated
 
-            delegate_data_mrk['contract'][delegate_contract][start_date]['mkr'] =  mkr_delegated
+            delegate_data_mkr['contract'][delegate_contract][start_date]['mkr'] =  mkr_delegated
             
             start_date += timedelta(days=1)   
 
     delegate_list_rank = []
-    for delegate_name, data in delegate_data_mrk['name'].items():
-        for date, data_mrk in data.items():        
+    for delegate_name, data in delegate_data_mkr['name'].items():
+        for date, data_mkr in data.items():        
             delegate_list_rank.append({
                 'Delegate': delegate_name,
-                'Total Delegation': data_mrk['mkr'],
+                'Total Delegation': data_mkr['mkr'],
                 'Rank': 1,
                 'Date': date
             })
     delegate_list_mkr = []
-    for delegate_contract, data in delegate_data_mrk['contract'].items():
-        for date, data_mrk in data.items():        
+    for delegate_contract, data in delegate_data_mkr['contract'].items():
+        for date, data_mkr in data.items():        
             delegate_list_mkr.append({
                 'contract': delegate_contract.lower(),
-                'mkr': data_mrk['mkr'],
+                'mkr': data_mkr['mkr'],
                 'date': date
             })
 
@@ -134,7 +133,7 @@ def get_poll_ids(start_date,end_date):
     poll_info = []   
     page = 0
     all_found = False
-    while all_found == False:
+    while all_found is False:
         page = page + 1
         if not start_date:
             base_url = "https://vote.makerdao.com/api/polling/v2/all-polls?network=mainnet&pageSize=30&page={}&orderBy=FURTHEST_START"
@@ -384,4 +383,3 @@ def custom_sort(df,poll_info,spell_info):
     transposed_df.insert(2, 'Title', title_list) 
 
     return transposed_df
-
