@@ -10,6 +10,10 @@ while True:
     # Step 1: Read the CSV file
     file_path = os.path.join(script_dir, 'delegate_data', 'Aligned Delegates.csv')
     df = pd.read_csv(file_path)
+    #Get a list of the order to use in the spreadsheet
+    df_spreadsheet = pd.read_csv(os.path.join(script_dir, 'delegate_data', 'order spreadsheet.csv'))
+
+    hardcoded_order = df_spreadsheet['contract'].str.lower().tolist()
 
     # Create DataFrames to store results
     df_ranking = pd.DataFrame()
@@ -84,7 +88,7 @@ while True:
     df.to_csv(output_csv, index=False)
     print(f"Participation vote data saved to {output_csv}")
 
-    df = maker.custom_sort(df,POLL_INFO,SPELL_INFO)
+    df = maker.custom_sort(df,hardcoded_order,POLL_INFO,SPELL_INFO)
   
     output_csv = os.path.join(script_dir, 'output_data', 'mkr.csv')
     df_mkr.to_csv(output_csv, index=False)

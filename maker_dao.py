@@ -283,7 +283,7 @@ def get_vote_execute_ids(spell_info,df,df_mkr):
     return df
 
 # Define the custom sorting function
-def custom_sort(df,poll_info,spell_info):
+def custom_sort(df,hardcoded_order,poll_info,spell_info):
     # Define your hardcoded order array
     df = df.drop(['MKR Delegated','Start Date', 'End Date','End Reason'], axis=1)
 
@@ -326,35 +326,7 @@ def custom_sort(df,poll_info,spell_info):
             title_list.append('Title')
             startDate_list.append('Start Date')
             endDate_list.append('End Date')  
-  
-    hardcoded_order = [
-        '0xedc6c08960f517f233e8b6f5a5a61b6b19834def','0xfe61acc408b63a5a03507a224398fa1fe8143f28',
-        '0xb18680092734394295d0591bb42f2bd3c184517e','0x907fea3a32215993cd6734402044f0957e1a3078',
-        '0x4d8c9c2cd8846533967b07becfc437542196ad6a','0xc2daea14891fc47ee76368ce7c54c7b200fba672',
-        '0x918d368ea7bbe3af0f4ec9172802f8badae01284','0x952dc79bcee652aad8cc9268d9c614fa166d0c1d',
-        '0x62060879dfbb6def3b73cfc48f1f0595c0fed505','0xca0c8bedc85c2ec9b0dfb42b3f2763486ddea1b6',
-        '0xb086ec4303dc1514c09618c6c68ee444d6eee041','0xa67f820945da8634d5b54fe09ca74b1559b7ff39',
-        '0xe2bfda5e1f59325e4b8df5feaa30e4ab6516bf28','0xa346c2eea05bb32c986ff755b2f19d2f0ba8d14c',
-        '0x475efac48a0a18660a7a26ee6bd5febf466930f8','0xC0E23144db36101453BA5c426445ca5Bf20f6b71',
-        '0x7938b304F1c28e85b6A021251C8CeefF20370f38','0xc3b85930deca88e5bcb48fa8ebe935f97d5e412b',
-        '0x1dd6c65e6e22f196d5c2209f439d1f07d02ba7a4','0x1D71861f54Aa6E63add5AcfC70E0E4bA9Fd9f259',
-        '0xb6ca415fc42b3f96641d14280c3f3a0f078e50e5','0xddecead383f2c22b4755ab32f56d48a4a1415258',
-        '0x8cc777ed9eb3a3b9087591697ecb7f60f256ce4f','0x58dc40b5f9f0758ee43b0a208fe362c90fdfad4d',
-        '0xa4b28dd898a885cce88caa00261d9fe6ceed32bb','0x8ea48c2264f1e5998c3ab3df3037903f8fae0caa',
-        '0xAB3fD902E4dad36c6b31E3954A8dE14Dd829533c','0xfbec297af3f4925966ab295a0771c420a9e85e08',
-        '0xa2c669dc868be0a2a8d6c0ad715e17f45035ba76','0x69b576a7e193a15a570ee5bb2149deb3f03537a2',
-        '0x5b4870014313c808c374f8ed1ab5b78813eb9c7f','0x45C52826EFA13A6DE713528BF42B520C9fA50081',
-        '0x0a907fe3adb890db7db27a7f21e188a4127b2e7c','0xdbb451BFd4e6E461caa2C8bf0dC83346A211c29C',
-        '0x644c092a5ccafc425ebf133123299a6397ae97d9','0x87686c4dd2ffd8e0b01f716eea1573f829737e97',
-        '0x27194176525a0088e3dc96973b22b01b15376ebd','0x51f3067cb6a1185d1e8316332921d9501fc4c006',
-        '0x3200c191cc245b3e2de3fd3b3087104f3f313f57','0x5b0a4932dc9e253f9b15fd69f07b68e9874ea794',
-        '0x445cb6c63c502fdbebd1b273f6aea1aad691e0aa','0xb335e8b70f95f28e79acf58491751f83b0050888',
-        '0x36124cee63ae786eea41bda0fb61b1b946e4c08c','0x117B58Cc89156b48c302aAa4832A19C1c1Aa124C',
-        '0x5d97f2af00c767b7333fdc2b58d10faff9f51024','0x47EcD8e9f8F299cE47E3aB891a874707d70A3aF9',
-        '0x911682CB21d7e5bdc75544fB1FCf0Fb8E9635AcF','0x204A2B6ab6A675D1f82634F92799Ced2bDD641A2'
-    ]
-
-  
+             
     # Identify the missing rows in hardcoded_order.
     missing_rows = [row for row in hardcoded_order if row.lower() not in df['Delegate Contract'].str.lower().tolist()]
 
