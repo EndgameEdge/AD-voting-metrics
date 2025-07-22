@@ -2,6 +2,17 @@ import requests
 from datetime import datetime,timedelta
 from dateutil import parser
 import sys
+from urllib.parse import urljoin
+from playwright.sync_api import sync_playwright
+
+HEADERS = {"User-Agent": "Mozilla/5.0","Accept": "application/json"}
+
+DUNE_MKR_API_URL = "https://api.dune.com/api/v1/query/3926020/results"
+DUNE_SKY_API_URL = "https://api.dune.com/api/v1/query/5261531/results"
+SKY_ALL_POLLS_URL =  "https://vote.sky.money/api/polling/all-polls"
+SKY_EXECUTIVE_SUPPORTERS_URL = "https://vote.sky.money/api/executive/supporters"
+SKY_POLL_ID_URL = "https://vote.sky.money/api/polling/tally"
+SKY_EXECUTIVE_URL = "https://vote.sky.money/api/executive"
 
 def generate_dates(query_input):
     # Get today's date
@@ -50,98 +61,129 @@ def get_delegate_data():
   
     url = "https://vote.makerdao.com/api/delegates/v1?network=mainnet&sortBy=random"
     response = requests.get(url)
+    
     data = response.json()
 
     delegate_list = data.get("delegates", [])
 
     return delegate_list
 
-#Define a function to filter and retrieve the MKR for each delegate by date.
-def get_mkr_delegated(address,data,end_date):
-    # Perform a search in the delegate list
-    delegate_info = next((info for info in data if info['voteDelegateAddress'].lower() == address.lower()), None)
-  
-    if delegate_info:
-        earliest_date = datetime.strptime( delegate_info['blockTimestamp'] , '%Y-%m-%dT%H:%M:%S%z')
+# #Define a function to retrieve the MKR for each delegate by date.
+def get_all_mkr_delegated():
 
-        mkr_locked_info = delegate_info.get("mkrLockedDelegate", [])
-        mkr_locked_info.sort(key=lambda x: x["blockTimestamp"])
+    payload = {}
+    headers = {
+        'X-Dune-API-Key': 'UcQrwk9uj3RO5NaR8s6tGmW2UgxNgNtD'
+    }
+
+    response = requests.request("GET", DUNE_MKR_API_URL, headers=headers, data=payload)
+
+    data = response.json()
+
+    delegate_list = data.get("result", {}).get("rows", [])
+
+    return delegate_list
+
+#Define a function to retrieve the SKY for each delegate by date.
+def get_all_sky_delegated():
+    
+    payload = {}
+    headers = {
+        'X-Dune-API-Key': 'UcQrwk9uj3RO5NaR8s6tGmW2UgxNgNtD'
+    }
+
+    response = requests.request("GET", DUNE_SKY_API_URL, headers=headers, data=payload)
+
+    data = response.json()
+
+    delegate_list = data.get("result", {}).get("rows", [])
+
+    return delegate_list
+
+def get_sky_delegated(data, contract_address, date):
+    # Loop through each item in the list
+    for item in data:
+        # Check if both the contract and date match
+
+        if (item.get("delegation_contract").strip().lower() == contract_address.strip().lower() and datetime.strptime(item.get("dt"), '%Y-%m-%d').date() == date):
+            # Return the running total balance for that match
+            return item.get("running_total_balance")
         
-        if mkr_locked_info:
-            mkr_delegated = 0
-            for mkr_locked_delegate in mkr_locked_info:
-                blockTimestamp_datetime = datetime.strptime(mkr_locked_delegate["blockTimestamp"], '%Y-%m-%dT%H:%M:%S%z').date()  
-                if end_date >= blockTimestamp_datetime:
-                    mkr_delegated = round(float(mkr_locked_delegate['callerLockTotal']), 4)
-        else:
-            mkr_delegated = 0
+    # Return 0 if no match is found
+    return 0
 
-        return mkr_delegated, earliest_date.strftime("%Y-%m-%d")
+#Define a function to retrieve the total SKY held by each delegate by date.
+def get_delegate_list_sky(df,start_date,end_date,token ='sky'):
+    
+    if token == 'sky':
+        all_sky_delegated = get_all_sky_delegated ()
     else:
-        return None, None
+        all_sky_delegated = get_all_mkr_delegated ()
 
-#Define a function to retrieve the total MK held by each delegate by date.
-def get_delegate_list_mkr(df,data,start_date,end_date):
     start_date_initial = start_date
-    delegate_data_mkr = {'contract':{}, 'name':{}}
+    delegate_data_sky = {'contract':{}, 'name':{}}
     for index,row in df.iterrows():
         start_date = start_date_initial
         delegate_name = row['Delegate Name'].strip().lower()
         delegate_contract = row['Delegate Contract']
-        if delegate_name not in delegate_data_mkr['name']:
-            delegate_data_mkr['name'][delegate_name] = {}
+        if delegate_name not in delegate_data_sky['name']:
+            delegate_data_sky['name'][delegate_name] = {}
   
-        if delegate_contract not in delegate_data_mkr['contract']:
-            delegate_data_mkr['contract'][delegate_contract] = {}
+        if delegate_contract not in delegate_data_sky['contract']:
+            delegate_data_sky['contract'][delegate_contract] = {}
 
         while start_date <= end_date:
-            if start_date.strftime("%Y-%m-%d") not in delegate_data_mkr['name'][delegate_name]:
-                delegate_data_mkr['name'][delegate_name][start_date.strftime("%Y-%m-%d")] = {'mkr':0}                
-            if start_date.strftime("%Y-%m-%d") not in delegate_data_mkr['contract'][delegate_contract]:
-                delegate_data_mkr['contract'][delegate_contract][start_date] = {'mkr':0}     
+            if start_date.strftime("%Y-%m-%d") not in delegate_data_sky['name'][delegate_name]:
+                delegate_data_sky['name'][delegate_name][start_date.strftime("%Y-%m-%d")] = {'sky':0}                
+            if start_date.strftime("%Y-%m-%d") not in delegate_data_sky['contract'][delegate_contract]:
+                delegate_data_sky['contract'][delegate_contract][start_date] = {'sky':0}     
 
-            mkr_delegated, earliest_date = get_mkr_delegated(delegate_contract,data,start_date)
+            sky_delegated= get_sky_delegated(all_sky_delegated, delegate_contract, start_date)
 
-            delegate_data_mkr['name'][delegate_name][start_date.strftime("%Y-%m-%d")]['mkr'] +=  mkr_delegated
+            delegate_data_sky['name'][delegate_name][start_date.strftime("%Y-%m-%d")]['sky'] +=  sky_delegated
 
-            delegate_data_mkr['contract'][delegate_contract][start_date]['mkr'] =  mkr_delegated
+            delegate_data_sky['contract'][delegate_contract][start_date]['sky'] =  sky_delegated
             
             start_date += timedelta(days=1)   
 
     delegate_list_rank = []
-    for delegate_name, data in delegate_data_mkr['name'].items():
-        for date, data_mkr in data.items():        
+    for delegate_name, data in delegate_data_sky['name'].items():
+        for date, data_sky in data.items():        
             delegate_list_rank.append({
                 'Delegate': delegate_name,
-                'Total Delegation': data_mkr['mkr'],
+                'Total Delegation': round(data_sky['sky'], 2),
                 'Rank': 1,
                 'Date': date
             })
-    delegate_list_mkr = []
-    for delegate_contract, data in delegate_data_mkr['contract'].items():
-        for date, data_mkr in data.items():        
-            delegate_list_mkr.append({
+    delegate_list_sky = []
+    for delegate_contract, data in delegate_data_sky['contract'].items():
+        for date, data_sky in data.items():        
+            delegate_list_sky.append({
                 'contract': delegate_contract.lower(),
-                'mkr': data_mkr['mkr'],
+                'sky': data_sky['sky'],
                 'date': date
             })
 
-    return delegate_list_mkr,delegate_list_rank
+    return delegate_list_sky,delegate_list_rank
 
 # define a function to get the polls IDs for Data.
 def get_poll_ids(start_date,end_date):
+
     poll_info = []   
     page = 0
     all_found = False
     while all_found is False:
         page = page + 1
-        if not start_date:
-            base_url = "https://vote.makerdao.com/api/polling/v2/all-polls?network=mainnet&pageSize=30&page={}&orderBy=FURTHEST_START"
-            response = requests.get(base_url.format(page))
-        else:
-            base_url = "https://vote.makerdao.com/api/polling/v2/all-polls?network=mainnet&pageSize=30&page={}&orderBy=FURTHEST_START&startDate={}"
-            response = requests.get(base_url.format(page,start_date.strftime("%Y-%m-%d")))
-      
+        if not start_date:    
+            base_url = f"{SKY_ALL_POLLS_URL}?network=mainnet&pageSize=30&page={page}&orderBy=FURTHEST_START"
+            response = requests.get(base_url,  headers=HEADERS)
+        else:            
+            base_url = f"{SKY_ALL_POLLS_URL}?network=mainnet&pageSize=30&page={page}&orderBy=FURTHEST_START&startDate={start_date.strftime("%Y-%m-%d")}"
+            response = requests.get(base_url,  headers=HEADERS)
+
+        if response.status_code != 200:
+            print(f"Error: Status code {response.status_code} for endpoint {base_url}")
+            sys.exit(1)
         data = response.json()
         # Make the API request
         paginationInfo = data.get("paginationInfo", [])
@@ -164,15 +206,18 @@ def get_poll_ids(start_date,end_date):
     return poll_info
 
 # Define a function to confirm the voting of each delegate in the conducted polls.
-def get_vote_poll_ids(poll_info,df,df_mkr):
-
-    base_url = "https://vote.makerdao.com/api/polling/tally/{}?network=mainnet"
+def get_vote_poll_ids(poll_info,df,df_sky):
     
     for poll in poll_info:
-        # Initialize an empty list to store vote status (Yes, Pending verification,No Delegated MKR or Not Started)
+        # Initialize an empty list to store vote status (Yes, Pending verification,No Delegated SKY or Not Started)
         vote_statuses = []
         # Make the API request
-        response = requests.get(base_url.format(poll['pollId']))
+        base_url = f"{SKY_POLL_ID_URL}/{poll['pollId']}?network=mainnet"
+        response = requests.get(base_url, headers=HEADERS)
+
+        if response.status_code != 200:
+            print(f"Error: Status code {response.status_code} for endpoint {base_url}")
+            sys.exit(1)
         data = response.json()
         for index,row in df.iterrows():
             address = row['Delegate Contract']
@@ -183,20 +228,20 @@ def get_vote_poll_ids(poll_info,df,df_mkr):
             start_date =  parser.parse(poll['startDate']).date()
             end_date = parser.parse(poll['endDate']).date()
             
-            delegates_mkr_available = df_mkr[(df_mkr['contract'].str.lower() == address.lower()) & 
-                                  (df_mkr['date'] >= start_date) & 
-                                  (df_mkr['date'] <= end_date)]
+            delegates_sky_available = df_sky[(df_sky['contract'].str.lower() == address.lower()) & 
+                                  (df_sky['date'] >= start_date) & 
+                                  (df_sky['date'] <= end_date)]
             
-            for index,delegate_mkr_available in delegates_mkr_available.iterrows():
+            for index,delegate_sky_available in delegates_sky_available.iterrows():
 
-                if delegate_mkr_available['mkr'] != 0 :
+                if delegate_sky_available['sky'] != 0 :
                     if voted:
                         voted = 'Yes'
                     else:
                         voted = 'No'
                     break
                 else:
-                    voted = 'No Delegated MKR'
+                    voted = 'No Delegated SKY'
 
  
             if first_delegate_date > end_date:
@@ -216,10 +261,13 @@ def get_execute_ids(start_date,end_date):
     start = 0
     limit = 100 
     while start < 10000000:
-     
-        base_url = "https://vote.makerdao.com/api/executive?start={}&limit={}"
-        response = requests.get(base_url.format(start,limit))
-     
+        base_url = f"{SKY_EXECUTIVE_URL}?start={start}&limit={limit}"
+        response = requests.get(base_url, headers=HEADERS)
+
+        if response.status_code != 200:
+            print(f"Error: Status code {response.status_code} for endpoint {base_url}")
+            sys.exit(1)
+
         data = response.json()
 
         if not data: break     
@@ -235,14 +283,19 @@ def get_execute_ids(start_date,end_date):
     return spell_info
 
 # Define a function to confirm the voting of each delegate in the spells.
-def get_vote_execute_ids(spell_info,df,df_mkr):
-    url = "https://vote.makerdao.com/api/executive/supporters?network=mainnet"
+def get_vote_execute_ids(spell_info,df,df_sky):
+
+    base_url = f"{SKY_EXECUTIVE_SUPPORTERS_URL}?network=mainnet"
     # Make the API request
-    response = requests.get(url)
+    response = requests.get(base_url, headers=HEADERS)
+    if response.status_code != 200:
+        print(f"Error: Status code {response.status_code} for endpoint {base_url}")
+        sys.exit(1)
+
     data = response.json()
    
     for spell in spell_info:
-        # Initialize an empty list to store vote status (Yes, Pending verification,No Delegated MKR or Not Started)
+        # Initialize an empty list to store vote status (Yes, Pending verification,No Delegated SKY or Not Started)
         vote_statuses = []
         spell_address = spell['address']
         start_date = spell['startDate']
@@ -257,20 +310,20 @@ def get_vote_execute_ids(spell_info,df,df_mkr):
             else:
                 voted = False
 
-            delegates_mkr_available = df_mkr[df_mkr['contract'].str.lower() == address.lower() ]
+            delegates_sky_available = df_sky[df_sky['contract'].str.lower() == address.lower() ]
             
-            for index,delegate_mkr_available in delegates_mkr_available.iterrows():
+            for index,delegate_sky_available in delegates_sky_available.iterrows():
        
-                if delegate_mkr_available['date'] != start_date : continue
+                if delegate_sky_available['date'] != start_date : continue
 
-                if delegate_mkr_available['mkr'] != 0 :
+                if delegate_sky_available['sky'] != 0 :
                     if voted:
                         voted = 'Yes'
                     else:
                         voted = 'Pending verification'
                     break
                 else:
-                    voted = 'No Delegated MKR'
+                    voted = 'No Delegated SKY'
 
             if first_delegate_date > start_date:
                 voted = 'Not Started'
@@ -285,7 +338,7 @@ def get_vote_execute_ids(spell_info,df,df_mkr):
 # Define the custom sorting function
 def custom_sort(df,hardcoded_order,poll_info,spell_info):
     # Define your hardcoded order array
-    df = df.drop(['MKR Delegated','Start Date', 'End Date','End Reason'], axis=1)
+    df = df.drop(['Start Date', 'End Date','End Reason'], axis=1)
 
     df.insert(df.columns.get_loc('Delegate Contract') + 1, 'Delegate', df['Delegate Name'].str.cat(df['Aligned Voter Committee'], sep='-'))
 

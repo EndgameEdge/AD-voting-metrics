@@ -1,44 +1,13 @@
-Delegate Name,Delegate Contract,Aligned Voter Committee,Start Date,End Date,End Reason,MKR Delegated,1107,1108,1109,1110,1111,1112,0x7b55617f7f04f7b45ee865ff9066469fbe28a632,0xb394ec56abd78c9264438168f8a8e1bd85f1f0ae,0x6cd68b55cdc991938d95d6995d97eb807aaeae44
-Cloaky,0xb335e8b70f95f28e79acf58491751f83b0050888,Sovereign Finance AVC,2023-06-06,,,20009.8368,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-Byteron,0xa346C2EEa05bB32c986FF755b2F19d2f0ba8d14C,Regenerative Finance AVC,2023-10-31,,,18600.0,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
-BLUE,0xb18680092734394295d0591bb42f2bd3c184517e,KISS AVC,2023-09-28,,,12317.9791,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
-JuliaChang,0x7938b304F1c28e85b6A021251C8CeefF20370f38,Regenerative Finance AVC,2024-01-24,,,12038.694,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-Rocky,0x5FaC03E07447C1A3f4aD9A5f778f23C9e1fC4255,Resiliency AVC,2024-04-20,,,9000.0,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-BONAPUBLICA,0xFE61acc408b63a5a03507A224398fa1FE8143F28,KISS AVC,2023-07-04,,,8057.4665,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
-vigilant,0xDE08aEf2b221274231b3547491ec8f0Fc80917e1,KISS AVC,2024-03-31,,,8050.005,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-BLUE,0x445cb6c63c502fdbebd1b273f6aea1aad691e0aa,Sovereign Finance AVC 2,2023-05-19,,,8001.5476,Yes,Yes,No,No,No,No,Pending verification,Yes,Yes
-PBG,0x69b576a7e193a15a570ee5bb2149deb3f03537a2,Resiliency AVC,2023-07-11,,,8000.5285,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-StoneWill,0x911682CB21d7e5bdc75544fB1FCf0Fb8E9635AcF,KISS AVC,2024-02-27,,,2778.0,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
-PBG,0xEb1764CC9577c52f430794E9044F64F1C49Dd395,Regenerative Finance AVC,2024-04-07,,,900.3696,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-UPMaker,0xc9C17EE58810172622b43B09C9C9FF31e50f5179,Resiliency AVC,2024-03-26,,,500.0,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-BONAPUBLICA,0x452a7626f587d6811509dC071768168ea763EA3C,Regenerative Finance AVC,2024-03-30,,,103.0,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-vigilant,0x51f3067cb6a1185d1e8316332921d9501fc4c006,Resiliency AVC,2023-07-10,,,100.5,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-JAG,0xfbec297af3f4925966ab295a0771c420a9e85e08,Resiliency AVC,2023-05-25,,,20.7762,No,No,No,No,No,No,Pending verification,Pending verification,Pending verification
-Jiaozi,0xc1a1bdb7d60b7cb3920787a15a2b583786c52fb6, NO AVC,2024-05-27,,,1.3981,No,No,Yes,Yes,Yes,Yes,Yes,Not Started,Not Started
-WBC,0x58dc40b5f9f0758ee43b0a208fe362c90fdfad4d,Regenerative Finance AVC,2023-05-11,,,1.0031,No,No,No,No,No,No,Pending verification,Pending verification,Yes
-Pipkin,0x45C52826EFA13A6DE713528BF42B520C9fA50081,Resiliency AVC,2024-01-17,,,0.7084,No,No,No,No,No,No,Pending verification,Pending verification,Pending verification
-WBC,0x5b0a4932dc9e253f9b15fd69f07b68e9874ea794,Resiliency AVC,2023-07-10,,,0.5262,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-Ikagai,0xAB3fD902E4dad36c6b31E3954A8dE14Dd829533c,Resiliency AVC,2023-08-13,,,0.5153,No,No,No,No,No,No,Pending verification,Pending verification,Pending verification
-Penguin Soldier,0x5b4870014313c808c374F8eD1AB5b78813EB9c7f,Resiliency AVC,2023-09-25,,,0.5,No,No,No,No,No,No,Pending verification,Pending verification,Pending verification
-Byteron,0x8Ea48C2264F1E5998c3aB3DF3037903F8FAe0cAa,Resiliency AVC,2023-10-31,,,0.5,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-Vision,0x3200c191cc245b3e2de3fd3b3087104f3f313f57,Resiliency AVC,2023-08-26,,,0.5,No,No,No,No,No,No,Pending verification,Pending verification,Pending verification
-Skynet,0x644c092a5ccafc425ebf133123299a6397ae97d9,Resiliency AVC,2023-06-06,,,0.5,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
-WBC,0xb086ec4303dc1514c09618c6c68ee444d6eee041,Neutral,2023-05-11,,,0.2,No,No,No,No,No,No,Pending verification,Pending verification,Yes
-StoneWill,0x204A2B6ab6A675D1f82634F92799Ced2bDD641A2,Regenerative Finance AVC,2024-02-27,,,0.0506,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
-PBG,0x952dc79bcee652aad8cc9268d9c614fa166d0c1d,Neutral,2023-04-09,,,0.0111,No,No,No,No,No,No,Pending verification,Pending verification,Pending verification
-QGov,0xC739914c461E0a58c460D5caCB764E7Eb95B27FC,Resiliency AVC,2024-04-05,,,0.0003,No,No,No,No,No,No,Pending verification,Pending verification,No Delegated MKR
-Cloaky,0x475efac48a0a18660a7a26ee6bd5febf466930f8,Regenerative Finance AVC,2023-06-06,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-JAG,0x36124cee63ae786eea41bda0fb61b1b946e4c08c,Sovereign Finance AVC,2023-05-25,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Rocky,0x2070cd766ba0d258081c0d3d027461dd3f6d2fa3,Sovereign Finance AVC,2024-04-20,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-JuliaChang,0x117B58Cc89156b48c302aAa4832A19C1c1Aa124C,Sovereign Finance AVC,2024-01-24,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-QGov,0x1dd6c65e6e22f196d5c2209f439d1f07d02ba7a4,Regenerative Finance AVC,2023-07-07,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Pipkin,0x47EcD8e9f8F299cE47E3aB891a874707d70A3aF9,Sovereign Finance AVC,2023-11-18,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Shanah,0x1D71861f54Aa6E63add5AcfC70E0E4bA9Fd9f259,Regenerative Finance AVC,2023-10-02,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Penguin Soldier,0x4d8c9c2cd8846533967b07becfc437542196ad6a, KISS AVC,2023-07-17,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Shanah,0xdbb451BFd4e6E461caa2C8bf0dC83346A211c29C,Resiliency AVC,2023-10-02,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Skynet,0xb6ca415fc42b3f96641d14280c3f3a0f078e50e5,Regenerative Finance AVC,2023-06-06,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Pf,0x62060879dfbb6def3b73cfc48f1f0595c0fed505,Neutral,2023-04-11,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Ikagai,0xC0E23144db36101453BA5c426445ca5Bf20f6b71,Regenerative Finance AVC,2023-08-13,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-Nimsen,0xa2c669dc868be0a2a8d6c0ad715e17f45035ba76,Resiliency AVC,2023-08-29,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-UPMaker,0xC241A035BC98128Ac3983812a67DFC52DDeaE09A,Regenerative Finance AVC,2024-04-03,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
-BLUE,0xd277aA6c915955a93ca5711bc9c92233042dE7a7,Sovereign Finance AVC,2024-05-06,,,0.0,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR,No Delegated MKR
+Delegate Name,Delegate Contract,Aligned Voter Committee,Start Date,End Date,End Reason,1507,1508,1509,1510,1511,1512,1513,1514,1515,1516,1517,1518,1519,1520,1521,1522,1523,1524,1525,1526,0xc9c4ddf824e4ff80158ab7862d168a35ce616e8e,0xbf5ef05a578f270c0e54c7f6ef7ccfb5c9cd56b0
+BONAPUBLICA,0xFc48fBcA739079aaB08216C4d5E506B96593753d,v3,2023-07-04,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+BLUE,0x173a1c04B79Ed9266721c1154dAa29AddC0B9558,v3,2023-09-28,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
+PBG,0x555230eCa835A808518EC3eA3082F05502BAb850,v3,2023-04-09,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
+WBC,0x4bed44a9839b8778f69bb6a6d9f843414377ae90,v3,2023-07-10,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
+Cloaky,0x0F23dE72e1581857eacD6308aebb69cF3a49CC86,v3,2023-06-06,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+JuliaChang,0x5D4a96aFadb5505a8fF21ddeCa2Baf3A63301396,legacy,2024-02-27,,,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY,No Delegated SKY
+AegisD,0xd260762E442ea1893E5eD5E7d28984e19aaFbF5e,v3,2025-03-04,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
+Excel,0xeAD02D18529C10EeDD995F760FDf5e380DDf3Da6,v3,2025-04-04,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification
+Tango,0x550E5EC00B9d26a3517ce772DdFE73e8Ed1672Ad,v3,2025-05-01,,,No,No,No,No,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Pending verification,Pending verification
+Max Staking Yield,0xFf7615E05EC1C8D5dED24AB50Bf74432666BEE2f,v3,2025-05-22,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Sky Staking,0xE01684B17dF0aBBdAf97839277b194bE4E1A7E79,v3,2025-05-22,,,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No,No,No,No,Yes,Yes,Yes,Yes,Yes
+Kuzmich,0x2C89024c13A80bC1B662A3dB990524652C15221C,v3,2025-07-01,,,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Not Started,Yes,Not Started,Not Started
